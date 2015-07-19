@@ -3,23 +3,19 @@ package com.pulloware.zenon.presentation;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.SeekBar;
 import android.widget.Toast;
-import com.pulloware.zenon.R;
 import com.pulloware.zenon.domain.AlertInterval;
 import com.pulloware.zenon.infrastructure.AlertService;
 
-public class Main extends Activity implements SeekBar.OnSeekBarChangeListener
+public class AlertStartNoUI extends Activity
 {
+    private static int defaultLevel = AlertInterval.maxLevel / 2;
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-        SeekBar levelSlider = (SeekBar) findViewById(R.id.levelSlider);
-//        levelSlider.setProgress(1);
-        levelSlider.setOnSeekBarChangeListener(this);
-
+        startAlerts(defaultLevel);
     }
 
     private void startAlerts(int level)
@@ -37,21 +33,4 @@ public class Main extends Activity implements SeekBar.OnSeekBarChangeListener
         }
     }
 
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int i, boolean b)
-    {
-        startAlerts(i);
-    }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar)
-    {
-
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar)
-    {
-
-    }
 }

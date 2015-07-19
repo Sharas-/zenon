@@ -5,7 +5,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
 import com.pulloware.zenon.R;
 import com.pulloware.zenon.domain.AlertInterval;
 import com.pulloware.zenon.domain.AlertSchedule;
@@ -18,7 +17,7 @@ public class AlertService extends Service
 {
     private static final int NOTIFICATION_ID = 111;
     public static final String PARAM_ALERTNESS_LEVEL = "PARAM_ALERTNESS_LEVEL";
-    private AlertScheduler ascheduler;
+    private AlertScheduler aScheduler;
 
     @Override
     public void onCreate()
@@ -35,12 +34,9 @@ public class AlertService extends Service
                 .setContentText("Hello World!")
                 .setCategory(NotificationCompat.CATEGORY_SERVICE)
                 .setOngoing(true);
-        //display main activity on click with preserved back stack
-        Intent resultIntent = new Intent(this, Main.class);
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this)
-            .addParentStack(Main.class)
-            .addNextIntent(resultIntent);
-        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent showUiIntent = new Intent(this, Main.class)
+            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, showUiIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(resultPendingIntent);
         startForeground(NOTIFICATION_ID, mBuilder.build());
     }
@@ -48,20 +44,29 @@ public class AlertService extends Service
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
-        int alevel = intent.getIntExtra(PARAM_ALERTNESS_LEVEL, -1);
-        if(alevel == -1)
+        int aLevel = intent.getIntExtra(PARAM_ALERTNESS_LEVEL, -1);
+        if (aLevel == -1)
         {
             throw new IllegalArgumentException("Alertness level required");
         }
+        releaseResources();
         AlertPlayer player = new AlertPlayer(this);
-        ascheduler = new AlertScheduler(this, player, new AlertSchedule(new AlertInterval(alevel)));
+        aScheduler = new AlertScheduler(this, player, new AlertSchedule(new AlertInterval(aLevel)));
         return Service.START_NOT_STICKY;
+    }
+
+    private void releaseResources()
+    {
+        if (aScheduler != null)
+        {
+            aScheduler.dispose();
+        }
     }
 
     @Override
     public void onDestroy()
     {
-        ascheduler.dispose();
+        releaseResources();
     }
 
     @Override
