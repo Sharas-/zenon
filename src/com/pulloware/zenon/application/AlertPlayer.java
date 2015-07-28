@@ -1,4 +1,4 @@
-package com.pulloware.zenon.infrastructure;
+package com.pulloware.zenon.application;
 
 import android.content.Context;
 import android.media.MediaPlayer;
@@ -20,18 +20,13 @@ public class AlertPlayer
         this.c = c;
     }
 
-    public void play()
+    public void playAsync()
     {
+//        if(Trace.on)
+//        {
+//            Trace.post(this.getClass().getSimpleName(), "Playing");
+//        }
         MediaPlayer mp = MediaPlayer.create(c, R.raw.water_drop);
         mp.start();
-        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
-        {
-            @Override
-            public void onCompletion(MediaPlayer mp)
-            {
-                mp.release();
-            }
-        });
-
     }
 }

@@ -4,7 +4,7 @@
     <uses-sdk android:minSdkVersion="11"/>
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
     <application android:icon="@drawable/icon" android:label="@string/app_name">
-        <activity android:name=".presentation.AlertStartNoUI"
+        <activity android:name=".presentation.AlertServiceLauncher"
                   android:theme="@android:style/Theme.Translucent.NoTitleBar"
                   android:noHistory="true"
                   android:excludeFromRecents="true">
@@ -16,7 +16,7 @@
         <activity android:name=".presentation.Main"
                   android:exported="true">
         </activity>
-        <service android:name=".infrastructure.AlertService"
+        <service android:name=".application.AlertService"
                  android:description="@string/app_name"
                  android:exported="false">
         </service>
