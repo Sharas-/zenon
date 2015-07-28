@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 import com.pulloware.zenon.R;
-import com.pulloware.zenon.application.commands.StartAlerts;
+import com.pulloware.zenon.application.AlertService;
 import com.pulloware.zenon.domain.AlertTime;
 
 public class AlertServiceLauncher extends Activity
@@ -28,7 +28,7 @@ public class AlertServiceLauncher extends Activity
     {
         try
         {
-            startService(new StartAlerts(this, level));
+            AlertService.start(level, this);
         }
         catch (Exception t)
         {
