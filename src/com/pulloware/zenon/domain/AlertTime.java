@@ -8,7 +8,7 @@ import java.util.Random;
  */
 public class AlertTime
 {
-    private static int[][] levelToTimeMap = new int[][]
+    public static int[][] intervals = new int[][]
         {
             {20, 40},
             {30, 60},
@@ -33,8 +33,8 @@ public class AlertTime
     public static int next(int mindfulnessLevel)
     {
         throwIfLevelInvalid(mindfulnessLevel);
-        int lower = levelToTimeMap[mindfulnessLevel][0];
-        int upper = levelToTimeMap[mindfulnessLevel][1];
+        int lower = intervals[mindfulnessLevel][0];
+        int upper = intervals[mindfulnessLevel][1];
         return new Random().nextInt((upper - lower) + 1) + lower;
     }
 }

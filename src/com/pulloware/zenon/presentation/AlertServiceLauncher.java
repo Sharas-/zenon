@@ -2,8 +2,6 @@ package com.pulloware.zenon.presentation;
 
 import android.app.Activity;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
@@ -20,7 +18,7 @@ public class AlertServiceLauncher extends Activity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        startAlerts(AlertTime.minMindfulnessLevel);
+//        startAlerts(AlertTime.minMindfulnessLevel);
         showNotification(AlertTime.minMindfulnessLevel);
     }
 
@@ -29,8 +27,7 @@ public class AlertServiceLauncher extends Activity
         try
         {
             AlertService.start(level, this);
-        }
-        catch (Exception t)
+        } catch (Exception t)
         {
             Toast.makeText(this, t.getMessage(), Toast.LENGTH_LONG).show();
         }
@@ -41,14 +38,9 @@ public class AlertServiceLauncher extends Activity
         NotificationCompat.Builder mBuilder =
             new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.icon)
-                .setContentTitle("Zen On")
-                .setContentText("zening at level " + level)
                 .setCategory(NotificationCompat.CATEGORY_SERVICE)
-                .setOngoing(true);
-        Intent showUiIntent = new Intent(this, Main.class)
-            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, showUiIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        mBuilder.setContentIntent(resultPendingIntent);
+                .setOngoing(true)
+                .setContent(ControlPanel.makeRemoteViews(this));
         NotificationManager nManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         nManager.notify(NOTIFICATION_ID, mBuilder.build());
     }

@@ -7,20 +7,20 @@ import android.widget.Button;
 import com.pulloware.zenon.R;
 import com.pulloware.zenon.application.AlertService;
 
-public class Main extends Activity
+public class Settings extends Activity
 {
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.settings);
         ((Button)findViewById(R.id.btnStop)).setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                AlertService.stop(Main.this);
+                AlertService.stop(Settings.this);
             }
         });
     }

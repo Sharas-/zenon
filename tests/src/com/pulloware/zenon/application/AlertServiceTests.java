@@ -1,4 +1,4 @@
-package com.pulloware.zenon.presentation.application;
+package com.pulloware.zenon.application;
 
 import android.content.Context;
 import android.content.Intent;

@@ -13,12 +13,14 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.Main"
+        <activity android:name=".presentation.Settings"
                   android:exported="true">
         </activity>
         <service android:name=".application.AlertService"
                  android:description="@string/app_name"
                  android:exported="false">
         </service>
+        <receiver android:name=".presentation.ControlPanel">
+        </receiver>
     </application>
 </manifest>
