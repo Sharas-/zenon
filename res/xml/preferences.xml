@@ -5,13 +5,11 @@
                         android:key="pref_alert_sound"
                         android:ringtoneType="alarm|notification"
                         android:showSilent="false"
-                        android:icon="@drawable/audio"
                         android:showDefault="true"
                         android:defaultValue="android.resource://com.pulloware.zenon/raw/default_alert"/>
     <CheckBoxPreference android:key="pref_silent"
                         android:title="Silent (vibrate only)"
-                        android:defaultValue="false"
-                        android:icon="@drawable/mute"/>
+                        android:defaultValue="false"/>
     <ListPreference android:key="pref_mindfulness_level"
                     android:title="Mindfulness Level (sets alert frequency)"
                     android:defaultValue="3"/>
