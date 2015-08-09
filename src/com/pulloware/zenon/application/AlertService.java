@@ -30,7 +30,7 @@ public class AlertService extends IntentService
 
         public static int getLevelParam(Intent i)
         {
-            int defaultLevel = AlertTime.maxMindfulnessLevel + 1;
+            int defaultLevel = AlertTime.levelCount + 1;
             int level = i.getIntExtra(PARAM_MINDFULNESS_LEVEL, defaultLevel);
             if (level == defaultLevel)
             {
@@ -48,7 +48,7 @@ public class AlertService extends IntentService
     @Override
     protected void onHandleIntent(Intent intent)
     {
-        new AlertPlayer(this).playAsync();
+        AlertPlayer.playAsync(this);
         if (PlayAlertCommand.hasLevelParam(intent))
         {
             scheduleAlert(PlayAlertCommand.getLevelParam(intent), this);
@@ -65,7 +65,7 @@ public class AlertService extends IntentService
     private static void cancelAlert(Context c)
     {
         Log.d("AlertService", "canceling last alert");
-        Scheduler.cancel(new PlayAlertCommand(c, AlertTime.maxMindfulnessLevel), c);
+        Scheduler.cancel(new PlayAlertCommand(c, 0), c);
     }
 
     public static void start(int mindfulnessLevel, Context c)

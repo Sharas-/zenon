@@ -3,8 +3,6 @@ package com.pulloware.zenon.application;
 import android.content.Context;
 import android.content.Intent;
 import android.test.AndroidTestCase;
-import com.pulloware.zenon.application.AlertPlayer;
-import com.pulloware.zenon.application.AlertService;
 import com.pulloware.zenon.infrastructure.Scheduler;
 import com.pulloware.zenon.infrastructure.Trace;
 

@@ -11,13 +11,12 @@ public class AlertTimeTests extends TestCase
 {
     public void testAlertTimesAreWithinIntervals()
     {
-        for (int level = AlertTime.minMindfulnessLevel; level <= AlertTime.maxMindfulnessLevel; ++level)
+        for (int level = 0; level < AlertTime.levelCount; ++level)
         {
             int time = AlertTime.next(level);
-            int lower = AlertTime.intervals[level][0];
-            int upper = AlertTime.intervals[level][1];
-            assertTrue(MessageFormat.format("time {0} for level {1} is out of [{2}, {3}] range", time, level, lower, upper),
-                time >= lower && time <= upper);
+            TimeInterval t = AlertTime.getInterval(level);
+            assertTrue(MessageFormat.format("time {0} for level {1} is out of [{2}, {3}] range", time, level, t.lower, t.upper),
+                time >= t.lower && time <= t.upper);
         }
     }
 }

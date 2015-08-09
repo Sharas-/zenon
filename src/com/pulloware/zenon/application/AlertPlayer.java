@@ -2,33 +2,35 @@ package com.pulloware.zenon.application;
 
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.util.Log;
-import com.pulloware.zenon.R;
+import android.os.Vibrator;
+import com.pulloware.zenon.infrastructure.Settings;
 
 /**
  * Plays alerts asynchronously in background
  */
 public class AlertPlayer
 {
-    private Context c;
+    private static long[] vibratePattern = new long[]{0, 500, 100, 500};
 
-    public AlertPlayer(Context c)
-    {
-        if (c == null)
-        {
-            throw new IllegalArgumentException("Cannot create alert player without context");
-        }
-        this.c = c;
-    }
-
-    public void playAsync()
+    public static void playAsync(Context c)
     {
 //        if (Trace.on)
 //        {
 //            Trace.post(this.getClass().getSimpleName(), "Playing");
 //        }
-        Log.d("AlertPlayer", "playing now");
-        MediaPlayer mp = MediaPlayer.create(c, R.raw.water_drop);
-        mp.start();
+//            Log.d("AlertPlayer", "playing now");
+        if (Settings.getSilent(c))
+        {
+            vibrate(c);
+        }
+        else
+        {
+            MediaPlayer.create(c, Settings.getAlertSound(c)).start();
+        }
+    }
+
+    public static void vibrate(Context c)
+    {
+        ((Vibrator) c.getSystemService(c.VIBRATOR_SERVICE)).vibrate(vibratePattern, -1);
     }
 }

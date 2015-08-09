@@ -8,33 +8,36 @@ import java.util.Random;
  */
 public class AlertTime
 {
-    public static int[][] intervals = new int[][]
+    private static TimeInterval[] intervals = new TimeInterval[]
         {
-            {20, 40},
-            {30, 60},
-            {2 * 60, 10 * 60},
-            {20 * 60, 45 * 60},
-            {60 * 60, 150 * 60},
-            {180 * 60, 360 * 60},
+            new TimeInterval(20, 40),
+            new TimeInterval(30, 60),
+            new TimeInterval(2 * 60, 10 * 60),
+            new TimeInterval(20 * 60, 45 * 60),
+            new TimeInterval(60 * 60, 150 * 60),
         };
 
-    public static final int minMindfulnessLevel = 0;
-    public static final int maxMindfulnessLevel = 5;
+    public static final int levelCount = 5;
 
     public static void throwIfLevelInvalid(int mindfulnessLevel)
     {
-        if (mindfulnessLevel < minMindfulnessLevel || mindfulnessLevel > maxMindfulnessLevel)
+        if (mindfulnessLevel < 0 || mindfulnessLevel > levelCount)
         {
             throw new IllegalArgumentException(
-                MessageFormat.format("Mindfulness level must be within [{0}, {1}]", minMindfulnessLevel, maxMindfulnessLevel));
+                MessageFormat.format("Mindfulness level must be within [{0}, {1}]", 0, levelCount));
         }
     }
 
-    public static int next(int mindfulnessLevel)
+    public static int next(int level)
     {
-        throwIfLevelInvalid(mindfulnessLevel);
-        int lower = intervals[mindfulnessLevel][0];
-        int upper = intervals[mindfulnessLevel][1];
-        return new Random().nextInt((upper - lower) + 1) + lower;
+        throwIfLevelInvalid(level);
+        TimeInterval t = intervals[level];
+        return new Random().nextInt((t.upper - t.lower) + 1) + t.lower;
+    }
+
+    public static TimeInterval getInterval(int level)
+    {
+        throwIfLevelInvalid(level);
+        return intervals[level];
     }
 }

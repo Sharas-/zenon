@@ -7,7 +7,7 @@ import android.widget.Button;
 import com.pulloware.zenon.R;
 import com.pulloware.zenon.application.AlertService;
 
-public class Settings extends Activity
+public class Main extends Activity
 {
 
     @Override
@@ -20,7 +20,7 @@ public class Settings extends Activity
             @Override
             public void onClick(View view)
             {
-                AlertService.stop(Settings.this);
+                AlertService.stop(Main.this);
             }
         });
     }
