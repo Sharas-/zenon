@@ -40,4 +40,9 @@ public class AlertTime
         throwIfLevelInvalid(level);
         return intervals[level];
     }
+
+    public static TimeInterval[] getIntervals()
+    {
+        return intervals;
+    }
 }

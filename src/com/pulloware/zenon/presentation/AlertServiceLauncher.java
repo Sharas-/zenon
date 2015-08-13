@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import com.pulloware.zenon.R;
 import com.pulloware.zenon.application.AlertService;
@@ -13,13 +12,11 @@ import com.pulloware.zenon.infrastructure.Settings;
 
 public class AlertServiceLauncher extends Activity
 {
-    private static int defaultLevel = AlertTime.levelCount / 2;
-
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+        Settings.setDefaults(this);
         launch(Settings.getLevel(this), this);
     }
 
@@ -32,12 +29,13 @@ public class AlertServiceLauncher extends Activity
 
     private static void announceStart(int level, Context c)
     {
+        int NOTIFICATION_ID = -485;
         NotificationCompat.Builder mBuilder =
             new NotificationCompat.Builder(c)
                 .setSmallIcon(R.drawable.icon)
                 .setContentText("Zening at level " + level + " " + AlertTime.getInterval(level));
         NotificationManager nManager = (NotificationManager) c.getSystemService(NOTIFICATION_SERVICE);
-        nManager.notify(-48, mBuilder.build());
+        nManager.notify(NOTIFICATION_ID, mBuilder.build());
         try
         {
             Thread.sleep(2000);
@@ -45,7 +43,7 @@ public class AlertServiceLauncher extends Activity
         {
         } finally
         {
-            nManager.cancel(-48);
+            nManager.cancel(NOTIFICATION_ID);
         }
     }
 }

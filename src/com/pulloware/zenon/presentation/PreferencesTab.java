@@ -10,10 +10,7 @@ import com.pulloware.zenon.application.AlertPlayer;
 import com.pulloware.zenon.domain.AlertTime;
 import com.pulloware.zenon.infrastructure.Settings;
 
-/**
- * Created by sharas on 8/1/15.
- */
-public class Preferences extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener
+public class PreferencesTab extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener
 {
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -73,3 +70,4 @@ public class Preferences extends PreferenceFragment implements SharedPreferences
         }
     }
 }
+

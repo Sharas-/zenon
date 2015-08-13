@@ -5,14 +5,11 @@ import android.media.MediaPlayer;
 import android.os.Vibrator;
 import com.pulloware.zenon.infrastructure.Settings;
 
-/**
- * Plays alerts asynchronously in background
- */
 public class AlertPlayer
 {
     private static long[] vibratePattern = new long[]{0, 500, 100, 500};
 
-    public static void playAsync(Context c)
+    public static void play(Context c)
     {
 //        if (Trace.on)
 //        {

@@ -3,7 +3,6 @@ package com.pulloware.zenon.application;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import com.pulloware.zenon.domain.AlertTime;
 import com.pulloware.zenon.infrastructure.Scheduler;
 
@@ -48,7 +47,7 @@ public class AlertService extends IntentService
     @Override
     protected void onHandleIntent(Intent intent)
     {
-        AlertPlayer.playAsync(this);
+        AlertPlayer.play(this);
         if (PlayAlertCommand.hasLevelParam(intent))
         {
             scheduleAlert(PlayAlertCommand.getLevelParam(intent), this);
@@ -58,13 +57,13 @@ public class AlertService extends IntentService
     private static void scheduleAlert(int mindfulnessLevel, Context c)
     {
         long when = AlertTime.next(mindfulnessLevel) * 1000;
-        Log.d("AlertService", "scheduling for level " + mindfulnessLevel + " after " + when / 1000);
+//        Log.d("AlertService", "scheduling for level " + mindfulnessLevel + " after " + when / 1000);
         Scheduler.schedule(new PlayAlertCommand(c, mindfulnessLevel), when, c);
     }
 
     private static void cancelAlert(Context c)
     {
-        Log.d("AlertService", "canceling last alert");
+//        Log.d("AlertService", "canceling last alert");
         Scheduler.cancel(new PlayAlertCommand(c, 0), c);
     }
 

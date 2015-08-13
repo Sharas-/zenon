@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import com.pulloware.zenon.R;
 
 /**
  * Created by sharas on 8/1/15.
@@ -27,6 +28,11 @@ public class Settings
     private static SharedPreferences preferences(Context c)
     {
         return PreferenceManager.getDefaultSharedPreferences(c);
+    }
+
+    public static void setDefaults(Context c)
+    {
+        PreferenceManager.setDefaultValues(c, R.xml.preferences, false);
     }
 
     public static boolean getSilent(Context c)
