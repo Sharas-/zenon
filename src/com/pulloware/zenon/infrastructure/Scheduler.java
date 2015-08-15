@@ -15,7 +15,7 @@ public class Scheduler
     {
         long time = SystemClock.elapsedRealtime() + afterMs;
             ((AlarmManager) c.getSystemService(Context.ALARM_SERVICE)).set(
-            AlarmManager.ELAPSED_REALTIME_WAKEUP, time, makePendingIntent(command, c));
+            AlarmManager.ELAPSED_REALTIME, time, makePendingIntent(command, c));
     }
 
     public static void cancel(Intent command, Context c)
