@@ -9,7 +9,7 @@ import com.pulloware.zenon.infrastructure.Trace;
 
 public class AlertPlayer
 {
-    private static long[] vibratePattern = new long[]{0, 500, 100, 500};
+    private static long[] vibratePattern = new long[]{0, 500, 100, 250, 100, 250};
 
     public static void play(Context c)
     {

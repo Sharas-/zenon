@@ -18,6 +18,7 @@ public class AlertServiceLauncher extends Activity
         super.onCreate(savedInstanceState);
         Settings.setDefaults(this);
         launch(Settings.getLevel(this), this);
+        finish();
     }
 
     public static void launch(int level, Context c)
