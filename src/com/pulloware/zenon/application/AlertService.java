@@ -3,6 +3,8 @@ package com.pulloware.zenon.application;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import com.pulloware.zenon.domain.AlertTime;
 import com.pulloware.zenon.infrastructure.Scheduler;
 
@@ -47,7 +49,17 @@ public class AlertService extends IntentService
     @Override
     protected void onHandleIntent(Intent intent)
     {
-        AlertPlayer.play(this);
+        Handler handler = new Handler(Looper.getMainLooper());
+        Context c = this;
+        //workaround for player posting release event to dead thread
+        handler.post(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                AlertPlayer.play(c);
+            }
+        });
         if (PlayAlertCommand.hasLevelParam(intent))
         {
             scheduleAlert(PlayAlertCommand.getLevelParam(intent), this);
