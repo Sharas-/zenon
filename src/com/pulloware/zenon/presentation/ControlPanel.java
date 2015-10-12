@@ -8,13 +8,14 @@ import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.widget.RemoteViews;
 import com.pulloware.zenon.R;
+import com.pulloware.zenon.application.AlertPlayer;
 import com.pulloware.zenon.application.AlertService;
 import com.pulloware.zenon.domain.AlertTime;
 
 /**
  * Created by sharas on 7/30/15.
  */
-public class NotificationPanel extends BroadcastReceiver
+public class ControlPanel extends BroadcastReceiver
 {
     private static final int NOTIFICATION_ID = -111;
 
@@ -30,6 +31,7 @@ public class NotificationPanel extends BroadcastReceiver
         else if (cmd == CmdStart.ACTION)
         {
             AlertService.start(CmdStart.getLevel(intent), c);
+            AlertPlayer.play(c);
         }
     }
 
@@ -37,7 +39,7 @@ public class NotificationPanel extends BroadcastReceiver
     {
         public PanelCommand(Context c, String action)
         {
-            super(c, NotificationPanel.class);
+            super(c, ControlPanel.class);
             super.setAction(action);
         }
     }

@@ -65,7 +65,7 @@ public class PreferencesTab extends PreferenceFragment implements SharedPreferen
         {
             if (Settings.getSilent(c))
             {
-                AlertPlayer.vibrate(c);
+                AlertPlayer.play(c);
             }
         }
     }
