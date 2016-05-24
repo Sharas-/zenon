@@ -81,7 +81,7 @@ public class ControlPanel extends BroadcastReceiver
     private static RemoteViews makeRemoteViews(Context c)
     {
         RemoteViews rv = new RemoteViews(c.getPackageName(), R.layout.control_panel);
-        rv.setOnClickPendingIntent(R.id.btnStop,
+        rv.setOnClickPendingIntent(R.id.btnClose,
             PendingIntent.getBroadcast(c, 0, new CmdStop(c), 0));
         int level = 0;
         int[] buttons = new int[]{R.id.btnGo1, R.id.btnGo2, R.id.btnGo3, R.id.btnGo4, R.id.btnGo5};
@@ -91,10 +91,6 @@ public class ControlPanel extends BroadcastReceiver
                 PendingIntent.getBroadcast(c, i, new CmdStart(c, level), 0));
             ++level;
         }
-        Intent showSettings = new Intent(c, Main.class)
-            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        rv.setOnClickPendingIntent(R.id.btnSettings,
-            PendingIntent.getActivity(c, 0, showSettings, 0));
         return rv;
     }
 

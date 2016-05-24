@@ -15,8 +15,7 @@ public class AlertServiceLauncher extends Activity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        Settings.setDefaults(this);
-        launch(Settings.getLevel(this), this);
+        launch(Settings.getMindfulnessLevel(this), this);
         finish();
     }
 

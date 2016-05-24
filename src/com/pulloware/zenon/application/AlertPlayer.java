@@ -12,7 +12,7 @@ public class AlertPlayer
 
     public static void play(Context c)
     {
-        if (Settings.getSilent(c))
+        if (Settings.getIsPrivateMode(c))
         {
             vibrate(c);
         }
