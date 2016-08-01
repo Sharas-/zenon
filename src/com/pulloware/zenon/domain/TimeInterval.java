@@ -26,7 +26,7 @@ public class TimeInterval
     @Override
     public String toString()
     {
-        return MessageFormat.format("({0} - {1})", toHumanReadable(lower), toHumanReadable(upper));
+        return MessageFormat.format("[{0} - {1}]", toHumanReadable(lower), toHumanReadable(upper));
     }
 
     private String toHumanReadable(int seconds)

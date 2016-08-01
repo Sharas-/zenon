@@ -15,7 +15,7 @@ public class Settings
 
     public static Uri getAlertSound(Context c)
     {
-        return Uri.parse("android.resource://com.pulloware.zenon/raw/water_drop");
+        return Uri.parse("android.resource://com.pulloware.zenon/raw/knock");
     }
 
     public static boolean getIsPrivateMode(Context c)

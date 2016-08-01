@@ -30,7 +30,9 @@ public class ControlPanel extends BroadcastReceiver
         }
         else if (cmd == CmdStart.ACTION)
         {
-            AlertService.start(CmdStart.getLevel(intent), c);
+            int level = CmdStart.getLevel(intent);
+            AlertService.start(level, c);
+            show(level, c);
             AlertPlayer.play(c);
         }
     }
@@ -78,18 +80,15 @@ public class ControlPanel extends BroadcastReceiver
         }
     }
 
-    private static RemoteViews makeRemoteViews(Context c)
+    private static RemoteViews makeRemoteViews(Context c, int level)
     {
         RemoteViews rv = new RemoteViews(c.getPackageName(), R.layout.control_panel);
-        rv.setOnClickPendingIntent(R.id.btnClose,
-            PendingIntent.getBroadcast(c, 0, new CmdStop(c), 0));
-        int level = 0;
+        rv.setTextViewText(R.id.txtInterval, AlertTime.getInterval(level).toString());
         int[] buttons = new int[]{R.id.btnGo1, R.id.btnGo2, R.id.btnGo3, R.id.btnGo4, R.id.btnGo5};
         for (int i = 0; i < buttons.length; ++i)
         {
             rv.setOnClickPendingIntent(buttons[i],
-                PendingIntent.getBroadcast(c, i, new CmdStart(c, level), 0));
-            ++level;
+                PendingIntent.getBroadcast(c, i, new CmdStart(c, i), 0));
         }
         return rv;
     }
@@ -100,8 +99,8 @@ public class ControlPanel extends BroadcastReceiver
             new NotificationCompat.Builder(c)
                 .setSmallIcon(R.drawable.icon)
                 .setCategory(NotificationCompat.CATEGORY_SERVICE)
-                .setOngoing(true)
-                .setContent(makeRemoteViews(c));
+                .setDeleteIntent(PendingIntent.getBroadcast(c, 0, new CmdStop(c), 0))
+                .setContent(makeRemoteViews(c, level));
         NotificationManager nManager = (NotificationManager) c.getSystemService(c.NOTIFICATION_SERVICE);
         nManager.notify(NOTIFICATION_ID, mBuilder.build());
     }
