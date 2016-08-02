@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_height="fill_parent"
               android:layout_width="fill_parent"
+              android:background="@color/cpBackground"
               android:orientation="vertical">
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                   android:orientation="horizontal"
@@ -19,6 +20,7 @@
                   android:id="@+id/txtInterval"
                   android:layout_height="wrap_content"
                   android:layout_weight="4"
+                  android:textColor="@color/levelBtnActive"
                   android:gravity="center"
                   android:layout_gravity="bottom"
                   android:text="[10 s - 10 min]"/>
@@ -30,6 +32,7 @@
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:paddingLeft="15dp"
+                  android:background="@color/cpLevelBackground"
                   android:paddingRight="15dp"
                   android:id="@+id/bottomPanel">
         <Button style="@style/level_btn_style"

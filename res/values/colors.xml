@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="levelBtnActive">#f7d140</color>
+    <color name="levelBtnPassive">#FFFFFF</color>
+    <color name="cpBackground">#386093</color>
+    <color name="cpLevelBackground">#375d8e</color>
+</resources>

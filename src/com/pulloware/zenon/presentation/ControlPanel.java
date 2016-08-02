@@ -82,14 +82,18 @@ public class ControlPanel extends BroadcastReceiver
 
     private static RemoteViews makeRemoteViews(Context c, int level)
     {
+        AlertTime.throwIfLevelInvalid(level);
         RemoteViews rv = new RemoteViews(c.getPackageName(), R.layout.control_panel);
         rv.setTextViewText(R.id.txtInterval, AlertTime.getInterval(level).toString());
         int[] buttons = new int[]{R.id.btnGo1, R.id.btnGo2, R.id.btnGo3, R.id.btnGo4, R.id.btnGo5};
+        int btnTxtColor = c.getResources().getColor(R.color.levelBtnPassive);
         for (int i = 0; i < buttons.length; ++i)
         {
             rv.setOnClickPendingIntent(buttons[i],
                 PendingIntent.getBroadcast(c, i, new CmdStart(c, i), 0));
+            rv.setTextColor(buttons[i], btnTxtColor);
         }
+        rv.setTextColor(buttons[level], c.getResources().getColor(R.color.levelBtnActive));
         return rv;
     }
 
