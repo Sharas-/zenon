@@ -14,7 +14,9 @@
         <TextView android:layout_width="0dp"
                   android:layout_height="wrap_content"
                   android:id="@+id/logo"
+                  android:textStyle="bold"
                   android:layout_weight="1"
+                  android:textColor="@android:color/white"
                   android:text="ZenOn"></TextView>
         <TextView android:layout_width="0dp"
                   android:id="@+id/txtInterval"
@@ -22,6 +24,7 @@
                   android:layout_weight="4"
                   android:textColor="@color/levelBtnActive"
                   android:gravity="center"
+                  android:textStyle="bold"
                   android:layout_gravity="bottom"
                   android:text="[10 s - 10 min]"/>
         <FrameLayout style="@style/spacer"/>
